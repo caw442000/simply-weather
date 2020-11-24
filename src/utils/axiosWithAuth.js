@@ -9,10 +9,3 @@ export const axiosWithAuth = () => {
   });
 }
 
-// export const axiosWithAuth = (search) => {
-//   return axios.create({
-//       baseURL: `http://api.weatherapi.com/v1/${search}/${API_KEY}`,
-//       headers: {
-//       }
-//   });
-// }
