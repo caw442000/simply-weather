@@ -6,12 +6,11 @@ const CurrentWeather = () => {
   console.log("current weather", weatherData)
 
   return (
-    <div>
-      <h1>Current Weather</h1>
-      <p>
-        {weatherData.current &&
-          `${weatherData?.location?.name}, ${weatherData?.location?.region}`}
-      </p>
+    <div className ='current__card'>
+      {weatherData.current && <h1>Current Weather</h1>}
+      
+      {weatherData.current && <p> {weatherData?.location?.name}, {weatherData?.location?.region}</p>}
+      
     </div>
   );
 };

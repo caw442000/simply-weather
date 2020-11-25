@@ -108,14 +108,14 @@ textarea {
 /* END RESET */
 
 
-/* html {
+html {
   background: url(./assets/Clouds-1000s-1711px.svg) no-repeat center center fixed;
   background-size: cover;
   height: 100%;
   overflow: hidden;
-  /* width: 100%; 
+  width: 100%; 
 
   top: 0;
   left: 0;
 
-} */
+}

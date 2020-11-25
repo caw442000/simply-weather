@@ -13,6 +13,7 @@ const API_KEY = process.env.REACT_APP_WEATHER_API_KEY
 
 export const fetchWeather = (search) => async (dispatch) => {
   dispatch({type: 'FETCH_WEATHER_START'})
+  console.log("fetchForecast value", search)
 
   try {
     // const { data } = await axiosWithAuth().get(`current.json?key=${API_KEY}&q=${search.zipcode.length === 5 ? search.zipcode : search.city}`)
@@ -27,6 +28,7 @@ export const fetchWeather = (search) => async (dispatch) => {
 }
 export const fetchForecast = (search) => async (dispatch) => {
   dispatch({type: 'FETCH_FORECAST_START'})
+  console.log("fetchForecast value", search)
 
   try {
     // const { data } = await axiosWithAuth().get(`current.json?key=${API_KEY}&q=${search.zipcode.length === 5 ? search.zipcode : search.city}`)
