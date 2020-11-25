@@ -1,3 +1,3 @@
-import { fetchWeather } from './weatherAction'
+import { fetchWeather, fetchForecast } from './weatherAction'
 
-export { fetchWeather };
+export { fetchWeather, fetchForecast };
