@@ -129,11 +129,15 @@ const Search = () => {
   };
 
 
-  const formZipCodeSubmit = async (e) => {
+  const formSubmit = async (e) => {
     e.preventDefault();
-    console.log("value to submit", value?.description);
+    // console.log("value to submit", value?.description);
+    // console.log("value to option", option);
+
+    
     try {
-      await dispatch(fetchWeather(value?.description || inputValue));
+      // await dispatch(fetchWeather(option?.description || option || inputValue));
+      await dispatch(fetchWeather( inputValue));
       // dispatch(fetchForecast(search));
       
     } catch (error) {
@@ -149,10 +153,36 @@ const Search = () => {
 
     setInputValue("")
     setValue(null)
+  
+  };
+  const googleSubmit = async (option) => {
+    // console.log("value to submit", value?.description);
+    console.log("value to option", option);
+
+    let submission = option
+    try {
+      // await dispatch(fetchWeather(option?.description || option || inputValue));
+      await dispatch(fetchWeather(submission?.description || inputValue));
+      // dispatch(fetchForecast(search));
+      
+    } catch (error) {
+        console.log("zipcode submit error", error)
+
+    }
+
+    setSearch({
+      zipcode: "",
+      city: "",
+      state: "",
+    })
+
+    setInputValue("")
+    setValue(null)
+    submission = null
   };
   return (
-    <div className="search">
-      <form onSubmit={formZipCodeSubmit}>
+    <>
+       <form className="search" onSubmit={formSubmit}>
         {/* <label htmlFor="zipcode">Zip Code: </label>
         <input
           type="text"
@@ -166,25 +196,26 @@ const Search = () => {
         <button>ENTER</button> */}
       <Autocomplete
       id="google-map-demo"
-      style={{ width: 300 }}
+      // style={{ width: 300 }}
       getOptionLabel={(option) => (typeof option === 'string' ? option : option.description)}
       filterOptions={(x) => x}
       options={options}
-      fullWidth
+      autoSelect
       autoComplete
       includeInputInList
       filterSelectedOptions
+      fullWidth
       value={value}
-      onClick={formZipCodeSubmit}
       onChange={(event, newValue) => {
         setOptions(newValue ? [newValue, ...options] : options);
         setValue(newValue);
       }}
       onInputChange={(event, newInputValue) => {
         setInputValue(newInputValue);
+        console.log("what is input change", inputValue)
       }}
       renderInput={(params) => (
-        <TextField {...params} label="Add a location" variant="outlined" fullWidth />
+        <TextField {...params} label="Enter a location" variant="outlined" fullWidth />
       )}
       renderOption={(option) => {
         const matches = option.structured_formatting.main_text_matched_substrings;
@@ -200,8 +231,9 @@ const Search = () => {
             </Grid>
             <Grid item xs>
               {parts.map((part, index) => (
-                <span key={index} style={{ fontWeight: part.highlight ? 700 : 400 }}>
+                <span key={index}  onClick={() => googleSubmit(option)} style={{ fontWeight: part.highlight ? 700 : 400 }}>
                   {part.text}
+                
                 </span>
               ))}
 
@@ -213,8 +245,8 @@ const Search = () => {
         );
       }}
       />
-      </form>
-    </div>
+    </form>
+</>
   );
 };
 
