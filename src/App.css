@@ -30,8 +30,10 @@
 }
 
 .header {
-  width: 100vw;
+  width: 100%;
   margin-top: 25px;
+  display: flex;
+  justify-content: center;
 }
 
 .current__card {
