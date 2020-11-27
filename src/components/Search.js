@@ -72,18 +72,18 @@ const Search = () => {
   return (
     <>
        <form className="search" onSubmit={formSubmit}>
-        <label htmlFor="zipcode">Zip Code: </label>
+        {/* <label htmlFor="zipcode">Zip Code: </label> */}
         <input
           type="text"
           name="zipcode"
           placeholder="Enter Zip Code"
           value={search.zipcode}
           onChange={handleChange}
-          style={{height: "1.5rem" }}
+          style={{height: "1.5rem", width: "100%" }}
         />
 
 
-        <button>ENTER</button>
+        {/* <button>ENTER</button> */}
       
     </form>
 </>
