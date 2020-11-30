@@ -4,7 +4,7 @@ import ForecastCard from "./ForecastCard";
 
 
 
-const ForecastWeather = ({metric}) => {
+const ForecastWeather = ({}) => {
   const forecastData = useSelector((state) => state.weather.data.forecast);
 
   console.log("forecast data", forecastData)
@@ -12,7 +12,7 @@ const ForecastWeather = ({metric}) => {
   return (
     <div className="forecast__container">
       {forecastData?.forecastday.map((forecast, index) => (
-        <ForecastCard key={index} index={index} forecast = {forecast} metric={metric} />
+        <ForecastCard key={index} index={index} forecast = {forecast} />
         )
       )
 

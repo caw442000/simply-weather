@@ -1,15 +1,14 @@
 import React, { useState } from "react";
 import { fetchWeather } from "../../store/actions";
-
 import { useSelector, useDispatch } from "react-redux";
+import throttle from "lodash/throttle";
+import parse from "autosuggest-highlight/parse";
 
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import parse from "autosuggest-highlight/parse";
-import throttle from "lodash/throttle";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 
 import {
@@ -17,11 +16,9 @@ import {
   getLatLng,
 } from "use-places-autocomplete";
 
-const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_LOCATION_API_KEY;
 
-// implement yup for validation
-// move to formik
+
 const CssAutoComplete = withStyles({
   root: {
     "& label.Mui-focused": {
@@ -49,12 +46,7 @@ const CssAutoComplete = withStyles({
       },
     },
   },
-  input: {
-    color: "white",
-    "&::placeholder": {
-      color: "blue",
-    },
-  },
+
 })(Autocomplete);
 
 function loadScript(src, position, id) {
@@ -77,30 +69,20 @@ const useStyles = makeStyles((theme) => ({
     "&::placeholder": {
       color: "white",
     },
-    //   inputLabel: {
-    //     color: "red",
-    //   },
-    // },
-    // icon: {
-    //     fill: "white",
-    //     color: "red"
-    //   }
   },
 }));
 
 
 
 const GoogleSearch = () => {
-  let inputRef;
-
   const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weather.data);
 
-  const [search, setSearch] = useState({
-    zipcode: "",
-    city: "",
-    state: "",
-  });
+  // const [search, setSearch] = useState({
+  //   zipcode: "",
+  //   city: "",
+  //   state: "",
+  // });
 
   console.log("length", weatherData?.length);
   console.log("data", weatherData);
@@ -167,13 +149,13 @@ const GoogleSearch = () => {
     };
   }, [value, inputValue, fetch]);
 
-  const handleChange = (e) => {
-    setSearch({
-      ...search,
-      [e.target.name]: e.target.value,
-    });
-    console.log("zip", search);
-  };
+  // const handleChange = (e) => {
+  //   setSearch({
+  //     ...search,
+  //     [e.target.name]: e.target.value,
+  //   });
+  //   console.log("zip", search);
+  // };
 
   const formSubmit = async (e) => {
     e.preventDefault();
@@ -188,11 +170,11 @@ const GoogleSearch = () => {
       console.log("zipcode submit error", error);
     }
 
-    setSearch({
-      zipcode: "",
-      city: "",
-      state: "",
-    });
+    // setSearch({
+    //   zipcode: "",
+    //   city: "",
+    //   state: "",
+    // });
 
     setInputValue("");
     setValue(null);
@@ -210,31 +192,13 @@ const GoogleSearch = () => {
     });
     
 
-    // console.log("place autoComplete", geocoder)
-    // let submission;
-    // console.log("value to option", option);
-
-    // let textChecker = option?.structured_formatting.secondary_text?.split(",");
-    // console.log("textchecker", textChecker);
-    // if (textChecker?.length > 2) {
-    //   submission = option.structured_formatting.secondary_text;
-    // } else {
-    //   submission = option.description;
-    // }
 
     try {
-      // await dispatch(fetchWeather(option?.description || option || inputValue));
       await dispatch(fetchWeather(submission || inputValue));
-      // dispatch(fetchForecast(search));
     } catch (error) {
       console.log("google submit error", error);
     }
 
-    setSearch({
-      zipcode: "",
-      city: "",
-      state: "",
-    });
 
     setInputValue("");
     setValue(null);
@@ -262,20 +226,10 @@ const GoogleSearch = () => {
 
     return filteredOptions;
   };
+
   return (
     <>
       <form className="search" onSubmit={formSubmit}>
-        {/* <label htmlFor="zipcode">Zip Code: </label>
-        <input
-          type="text"
-          name="zipcode"
-          value={search.zipcode}
-          onChange={handleChange}
-          style={{height: "1.5rem" }}
-        />
-
-
-        <button>ENTER</button> */}
         <CssAutoComplete
           id="google-map"
           classes={classes}
@@ -290,6 +244,7 @@ const GoogleSearch = () => {
           includeInputInList
           filterSelectedOptions
           fullWidth
+        
           value={value}
           onClick={() => googleSubmit(value)}
           onChange={(event, newValue) => {
@@ -309,6 +264,7 @@ const GoogleSearch = () => {
               InputLabelProps={{
                 className: classes.input,
               }}
+              required
             />
           )}
           renderOption={(option) => {

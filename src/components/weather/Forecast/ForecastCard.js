@@ -1,8 +1,13 @@
 import React from "react";
 import Moment from "react-moment";
+import { useSelector} from "react-redux";
 
-const ForecastCard = ({ index, forecast, metric }) => {
+
+const ForecastCard = ({ index, forecast }) => {
   console.log("forecast", forecast);
+  const metric = useSelector((state) => state.weather.toggleUS);
+  
+
 
   return (
     <div className="forecast__card">

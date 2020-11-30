@@ -1,13 +1,10 @@
 import {
   FETCH_WEATHER_START,
   FETCH_WEATHER_SUCCESS,
-  FETCH_WEATHER_FAILURE,
-  FETCH_FORECAST_START,
-  FETCH_FORECAST_SUCCESS,
-  FETCH_FORECAST_FAILURE,
+  FETCH_WEATHER_FAILURE
 } from "../actions/weatherAction";
 
-const TOGGLE_METRIC = " TOGGLE_METRIC";
+export const TOGGLE_METRIC = " TOGGLE_METRIC";
 
 const initialState = {
   error: "",
@@ -26,6 +23,7 @@ export const weatherReducer = (state = initialState, action) => {
       return {
         ...state,
         isFetching: true,
+        error: "",
       };
     case FETCH_WEATHER_SUCCESS:
       return {
@@ -43,26 +41,8 @@ export const weatherReducer = (state = initialState, action) => {
     case TOGGLE_METRIC:
       return {
         ...state,
-        toggleUS: action.payload,
+        toggleUS: !state.toggleUS,
       };
-    // case FETCH_FORECAST_START:
-    //   return {
-    //     ...state,
-    //     isFetchingForecast: true,
-    //   };
-    // case FETCH_FORECAST_SUCCESS:
-    //   return {
-    //     ...state,
-    //     isFetchingForecast: false,
-    //     data: action.payload,
-    //     error: "",
-    //   };
-    // case FETCH_FORECAST_FAILURE:
-    //   return {
-    //     ...state,
-    //     isFetchingForecast: false,
-    //     error: action.payload,
-    //   };
     default:
       return state;
   }
