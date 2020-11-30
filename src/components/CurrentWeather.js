@@ -1,42 +1,50 @@
 import { useEffect } from "react";
 import { useSelector } from "react-redux";
 
-const CurrentWeather = () => {
+const CurrentWeather = ({metric}) => {
   const weatherData = useSelector((state) => state.weather.data);
-  const dateTime = new Date(0)
+  const dateTime = new Date(0);
 
-  console.log("current weather", weatherData)
+  console.log("current weather", weatherData);
+  console.log("US", metric)
 
   useEffect(() => {
-    console.log("local code", weatherData?.location?.localtime_epoch)
-     dateTime.setUTCSeconds(weatherData?.location?.localtime_epoch)
-     console.log(dateTime)
-    return () => {
-    }
-  }, [weatherData])
-
-//   const arr1 = [2,3,4,4,2,3,3,4,4,5,5,6,6,7,5,32,3,4,5]
-//   const arr2 = [2,3,4,4,2,2222,3,4,4,5,5,6,6,7,5,32,3,4,5]
-
-//   const setup = [...new Set(arr1.concat(arr2))]
-//   // setup.add(...numbersa)
-  
-// console.log(setup)
-  
+    console.log("local code", weatherData?.location?.localtime_epoch);
+    dateTime.setUTCSeconds(weatherData?.location?.localtime_epoch);
+    console.log(dateTime);
+    return () => {};
+  }, [weatherData]);
 
   return (
-    <div className ='current__card'>
-      {weatherData.current && <h1>Current Weather in {weatherData?.location?.name}, {weatherData?.location?.region} </h1>}
-      
-      {/* {weatherData.current && <p> {weatherData?.location?.name}, {weatherData?.location?.region}</p>} */}
-      {/* {weatherData.current && <p> {dateTime}</p>} */}
-      {weatherData.current && <p> {weatherData?.current?.condition.text} </p>}
-      {weatherData.current && <p> {Math.round(weatherData?.current?.temp_f)}&deg;F</p>} 
-      {weatherData.current && <img src= {weatherData?.current?.condition.icon} />}
+    <>
+      {!weatherData.current ? null : (
+        <div className="current__card">
+          <h1 className="current__card__location">
+              {`${weatherData?.location?.name}, ${weatherData?.location?.region}`}
+            </h1>
+          <div className="icon__container">
+            <img
+              className="current__card__icon"
+              src={weatherData?.current?.condition.icon}
+            />
+            {/* <p> {weatherData?.current?.condition.text} </p> */}
+            {metric === true ? (
 
+              <h1 className="current__card__temp"> {Math.round(weatherData?.current?.temp_f)}&deg;F</h1>
+              
+              ): (
+                
+                <h1 className="current__card__temp"> {Math.round(weatherData?.current?.temp_c)}&deg;C</h1>
 
+            )}
+          </div>
       
-    </div>
+          
+            
+          </div>
+  
+      )}
+    </>
   );
 };
 
