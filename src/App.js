@@ -5,14 +5,16 @@ import ForecastWeather from './components/ForecastWeather';
 import Search from './components/Search';
 import background from './assets/Clouds-1000s-1711px.svg'
 import Header from './components/Header';
+import WeatherContainer from './components/WeatherContainer';
 
 function App() {
 
   return (
     <div className="app" >
       <Header />
-      <CurrentWeather />
-      <ForecastWeather />
+      <WeatherContainer />
+      {/* <CurrentWeather /> */}
+      {/* <ForecastWeather /> */}
     </div>
   );
 }

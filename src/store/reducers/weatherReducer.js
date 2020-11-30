@@ -7,6 +7,8 @@ import {
   FETCH_FORECAST_FAILURE,
 } from "../actions/weatherAction";
 
+const TOGGLE_METRIC = " TOGGLE_METRIC";
+
 const initialState = {
   error: "",
   isFetchingCurrent: false,
@@ -16,7 +18,7 @@ const initialState = {
   current: [],
   forecast: [],
   data: [],
-  toggle: "US"
+  toggleUS: true,
 };
 
 export const weatherReducer = (state = initialState, action) => {
@@ -38,6 +40,11 @@ export const weatherReducer = (state = initialState, action) => {
         ...state,
         isFetching: false,
         error: action.payload,
+      };
+    case TOGGLE_METRIC:
+      return {
+        ...state,
+        toggleUS: action.payload,
       };
     // case FETCH_FORECAST_START:
     //   return {

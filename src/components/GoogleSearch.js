@@ -8,16 +8,50 @@ import Autocomplete from "@material-ui/lab/Autocomplete";
 import LocationOnIcon from "@material-ui/icons/LocationOn";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import { makeStyles } from "@material-ui/core/styles";
 import parse from "autosuggest-highlight/parse";
 import throttle from "lodash/throttle";
-import { GridList } from "@material-ui/core";
+import { makeStyles, withStyles } from "@material-ui/core/styles";
 
 const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_LOCATION_API_KEY;
 
 // implement yup for validation
 // move to formik
+const CssAutoComplete = withStyles({
+  root: {
+    "& label.Mui-focused": {
+      color: "white",
+      "& .MuiInputLabel": {
+        color: "white",
+      },
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "white",
+      color: "white",
+    },
+    "& .MuiOutlinedInput-root": {
+      "& fieldset": {
+        borderColor: "white",
+        color: "white",
+      },
+      "&:hover fieldset": {
+        borderColor: "white",
+        color: "white",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "white",
+        color: "white",
+      },
+      
+    },
+  },
+  input: {
+    color: "white",
+    "&::placeholder": {
+      color: "blue"
+    },
+
+}})(Autocomplete);
 
 function loadScript(src, position, id) {
   if (!position) {
@@ -34,13 +68,24 @@ function loadScript(src, position, id) {
 const autocompleteService = { current: null };
 
 const useStyles = makeStyles((theme) => ({
-  icon: {
-    color: theme.palette.text.secondary,
-    marginRight: theme.spacing(2),
-  },
-}));
+  input: {
+    color: "white",
+    "&::placeholder": {
+      color: "white"
+    },
+  //   inputLabel: {
+  //     color: "red",
+  //   },
+  // },
+  // icon: {
+  //     fill: "white",
+  //     color: "red"
+  //   }
+}}));
 
 const GoogleSearch = () => {
+  let inputRef;
+
   const dispatch = useDispatch();
   const weatherData = useSelector((state) => state.weather.data);
 
@@ -110,11 +155,6 @@ const GoogleSearch = () => {
       }
     });
 
-    // if (value) {
-
-    //   formZipCodeSubmit(e)
-    // }
-
     return () => {
       active = false;
     };
@@ -152,15 +192,24 @@ const GoogleSearch = () => {
   };
   const googleSubmit = async (option) => {
     // console.log("value to submit", value?.description);
+    let submission;
     console.log("value to option", option);
+    
+    let textChecker = option?.structured_formatting.secondary_text?.split(',')
+    console.log("textchecker", textChecker)
+    if (textChecker?.length > 2) {
 
-    let submission = option;
+      submission = option.structured_formatting.secondary_text
+    } else {
+      submission = option.description
+    }
+
     try {
       // await dispatch(fetchWeather(option?.description || option || inputValue));
-      await dispatch(fetchWeather(submission?.description || inputValue));
+      await dispatch(fetchWeather(submission || inputValue));
       // dispatch(fetchForecast(search));
     } catch (error) {
-      console.log("zipcode submit error", error);
+      console.log("google submit error", error);
     }
 
     setSearch({
@@ -172,6 +221,7 @@ const GoogleSearch = () => {
     setInputValue("");
     setValue(null);
     submission = null;
+
   };
 
   function containsAny(source, target) {
@@ -181,7 +231,6 @@ const GoogleSearch = () => {
     return result.length > 0;
   }
   const OptionFilter = (options) => {
-    // const filteredOptions = options.filter((option) => ['postal_code', 'geocode', 'locality'].some(option.types))
     const filteredOptions = options.filter((option) => {
       let types = option.types;
       return containsAny(types, [
@@ -193,14 +242,12 @@ const GoogleSearch = () => {
     });
 
     console.log("options", filteredOptions);
-    options.map((option) => {
-      console.log("options.types", option.types[0]);
-    });
+
     return filteredOptions;
   };
   return (
     <>
-      {/* <form className="search" onSubmit={formSubmit}> */}
+      <form className="search" onSubmit={formSubmit}>
       {/* <label htmlFor="zipcode">Zip Code: </label>
         <input
           type="text"
@@ -212,9 +259,12 @@ const GoogleSearch = () => {
 
 
         <button>ENTER</button> */}
-      <Autocomplete
-        id="google-map-demo"
-        // style={{ width: 300 }}
+      <CssAutoComplete
+        id="google-map"
+        classes={classes}
+        freeSolo
+
+    
         getOptionLabel={(option) =>
           typeof option === "string" ? option : option.description
         }
@@ -226,6 +276,7 @@ const GoogleSearch = () => {
         filterSelectedOptions
         fullWidth
         value={value}
+        onClick={() => googleSubmit(value)}
         onChange={(event, newValue) => {
           setOptions(newValue ? [newValue, ...options] : options);
           setValue(newValue);
@@ -240,13 +291,20 @@ const GoogleSearch = () => {
             label="Enter a location"
             variant="outlined"
             fullWidth
+            InputLabelProps={{
+              className: classes.input,
+            }}
+  
+           
+
+
           />
         )}
         renderOption={(option) => {
           // console.log("options", option)
-          if (option.types === "postal_code") {
-            return null;
-          }
+          // if (option.types === "postal_code") {
+          //   return null;
+          // }
           const matches =
             option.structured_formatting.main_text_matched_substrings;
           const parts = parse(
@@ -257,7 +315,7 @@ const GoogleSearch = () => {
           return (
             <Grid container alignItems="center">
               <Grid item>
-                <LocationOnIcon className={classes.icon} />
+                <LocationOnIcon color="action" />
               </Grid>
               <Grid onClick={() => googleSubmit(option)} item xs>
                 {parts.map((part, index) => (
@@ -265,7 +323,6 @@ const GoogleSearch = () => {
 
                   <span
                     key={index}
-                    
                     style={{ fontWeight: part.highlight ? 700 : 400 }}
                   >
                     {part.text}
@@ -280,7 +337,7 @@ const GoogleSearch = () => {
           );
         }}
       />
-      {/* </form> */}
+      </form>
     </>
   );
 };
