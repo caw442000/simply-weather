@@ -92,9 +92,9 @@ A list of commonly used resources that I find helpful are listed in the acknowle
 
 This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
 
-- [Bootstrap](https://getbootstrap.com)
-- [JQuery](https://jquery.com)
-- [Laravel](https://laravel.com)
+- [Material UI](https://material-ui.com/)
+- [React](https://reactjs.org/)
+- [Redux](https://redux.js.org/)
 
 <!-- GETTING STARTED -->
 
@@ -116,20 +116,18 @@ This is an example of how to list things you need to use the software and how to
 
 1. Get a free API Key at [https://www.weatherapi.com/](https://www.weatherapi.com/)
 
-2. Get a free API Key at [https://www.weatherapi.com/](https://www.weatherapi.com/)
+2. ⚠️ Before you can start using the Google Places API and Geocoding API, you must sign up and create a billing account
 
 3. Clone the repo
    ```sh
-   git clone https://github.com/your_username_/Project-Name.git
+   git clone https://github.com/caw442000/weather-tracker.git
    ```
 4. Install NPM packages
    ```sh
    npm install
    ```
 5. Create a `.env` file in src folder
-   ```JS
-   follow structure of .env.sample
-   ```
+
 6. Enter your API in `.env`
    ```JS
     REACT_APP_WEATHER_API_KEY=ENTER YOUR API;
