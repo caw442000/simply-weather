@@ -1,11 +1,12 @@
 import React from "react";
 import CurrentWeather from "./CurrentWeather";
-import ForecastWeather from "./ForecastWeather";
+import ForecastWeather from "./Forecast/ForecastWeather";
 
 import { withStyles } from "@material-ui/core/styles";
 import Switch from "@material-ui/core/Switch";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
+
 
 const AntSwitch = withStyles((theme) => ({
   root: {

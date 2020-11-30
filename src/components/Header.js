@@ -1,15 +1,10 @@
 import React from 'react'
-import SearchLocationInput from './SearchLocationInput';
-import GoogleSearch from './GoogleSearch';
-import Search from './Search';
+import GoogleSearch from './search/GoogleSearch';
 
 const Header = () => {
   return (
     <div className="header">
-      {/* <Search /> */}
       <GoogleSearch />
-      {/* <SearchLocationInput /> */}
-
     </div>
   )
 }

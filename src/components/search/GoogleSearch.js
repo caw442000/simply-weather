@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { fetchWeather, fetchForecast } from "../store/actions";
+import { fetchWeather } from "../../store/actions";
 
 import { useSelector, useDispatch } from "react-redux";
 
@@ -11,6 +11,11 @@ import Typography from "@material-ui/core/Typography";
 import parse from "autosuggest-highlight/parse";
 import throttle from "lodash/throttle";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
+
+import {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
 
 const WEATHER_API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_LOCATION_API_KEY;
@@ -42,16 +47,15 @@ const CssAutoComplete = withStyles({
         borderColor: "white",
         color: "white",
       },
-      
     },
   },
   input: {
     color: "white",
     "&::placeholder": {
-      color: "blue"
+      color: "blue",
     },
-
-}})(Autocomplete);
+  },
+})(Autocomplete);
 
 function loadScript(src, position, id) {
   if (!position) {
@@ -71,17 +75,20 @@ const useStyles = makeStyles((theme) => ({
   input: {
     color: "white",
     "&::placeholder": {
-      color: "white"
+      color: "white",
     },
-  //   inputLabel: {
-  //     color: "red",
-  //   },
-  // },
-  // icon: {
-  //     fill: "white",
-  //     color: "red"
-  //   }
-}}));
+    //   inputLabel: {
+    //     color: "red",
+    //   },
+    // },
+    // icon: {
+    //     fill: "white",
+    //     color: "red"
+    //   }
+  },
+}));
+
+
 
 const GoogleSearch = () => {
   let inputRef;
@@ -191,18 +198,29 @@ const GoogleSearch = () => {
     setValue(null);
   };
   const googleSubmit = async (option) => {
-    // console.log("value to submit", value?.description);
-    let submission;
-    console.log("value to option", option);
+    let submission; 
+    await getGeocode({ address: option.description })
+    .then((results) => getLatLng(results[0]))
+    .then(({ lat, lng }) => {
+      console.log("📍 Coordinates: ", { lat, lng });
+      submission = `${lat},${lng}`
+    })
+    .catch((error) => {
+      console.log("😱 Error: ", error);
+    });
     
-    let textChecker = option?.structured_formatting.secondary_text?.split(',')
-    console.log("textchecker", textChecker)
-    if (textChecker?.length > 2) {
 
-      submission = option.structured_formatting.secondary_text
-    } else {
-      submission = option.description
-    }
+    // console.log("place autoComplete", geocoder)
+    // let submission;
+    // console.log("value to option", option);
+
+    // let textChecker = option?.structured_formatting.secondary_text?.split(",");
+    // console.log("textchecker", textChecker);
+    // if (textChecker?.length > 2) {
+    //   submission = option.structured_formatting.secondary_text;
+    // } else {
+    //   submission = option.description;
+    // }
 
     try {
       // await dispatch(fetchWeather(option?.description || option || inputValue));
@@ -221,17 +239,16 @@ const GoogleSearch = () => {
     setInputValue("");
     setValue(null);
     submission = null;
-
   };
 
   function containsAny(source, target) {
-    let result = source.filter(function (item) {
+    let result = source?.filter(function (item) {
       return target.indexOf(item) > -1;
     });
     return result.length > 0;
   }
   const OptionFilter = (options) => {
-    const filteredOptions = options.filter((option) => {
+    const filteredOptions = options?.filter((option) => {
       let types = option.types;
       return containsAny(types, [
         "postal_code",
@@ -248,7 +265,7 @@ const GoogleSearch = () => {
   return (
     <>
       <form className="search" onSubmit={formSubmit}>
-      {/* <label htmlFor="zipcode">Zip Code: </label>
+        {/* <label htmlFor="zipcode">Zip Code: </label>
         <input
           type="text"
           name="zipcode"
@@ -259,84 +276,81 @@ const GoogleSearch = () => {
 
 
         <button>ENTER</button> */}
-      <CssAutoComplete
-        id="google-map"
-        classes={classes}
-        freeSolo
+        <CssAutoComplete
+          id="google-map"
+          classes={classes}
+          freeSolo
+          getOptionLabel={(option) =>
+            typeof option === "string" ? option : option.description
+          }
+          filterOptions={(x) => x}
+          options={options}
+          autoSelect
+          autoComplete
+          includeInputInList
+          filterSelectedOptions
+          fullWidth
+          value={value}
+          onClick={() => googleSubmit(value)}
+          onChange={(event, newValue) => {
+            setOptions(newValue ? [newValue, ...options] : options);
+            setValue(newValue);
+          }}
+          onInputChange={(event, newInputValue) => {
+            setInputValue(newInputValue);
+            console.log("what is input change", inputValue);
+          }}
+          renderInput={(params) => (
+            <TextField
+              {...params}
+              label="Enter a location"
+              variant="outlined"
+              fullWidth
+              InputLabelProps={{
+                className: classes.input,
+              }}
+            />
+          )}
+          renderOption={(option) => {
+            // console.log("options", option)
+            // if (option.types === "postal_code") {
+            //   return null;
+            // }
+            const matches =
+              option.structured_formatting.main_text_matched_substrings;
+            const parts = parse(
+              option.structured_formatting.main_text,
+              matches.map((match) => [
+                match.offset,
+                match.offset + match.length,
+              ])
+            );
 
-    
-        getOptionLabel={(option) =>
-          typeof option === "string" ? option : option.description
-        }
-        filterOptions={(x) => OptionFilter(x)}
-        options={options}
-        autoSelect
-        autoComplete
-        includeInputInList
-        filterSelectedOptions
-        fullWidth
-        value={value}
-        onClick={() => googleSubmit(value)}
-        onChange={(event, newValue) => {
-          setOptions(newValue ? [newValue, ...options] : options);
-          setValue(newValue);
-        }}
-        onInputChange={(event, newInputValue) => {
-          setInputValue(newInputValue);
-          console.log("what is input change", inputValue);
-        }}
-        renderInput={(params) => (
-          <TextField
-            {...params}
-            label="Enter a location"
-            variant="outlined"
-            fullWidth
-            InputLabelProps={{
-              className: classes.input,
-            }}
-  
-           
+            return (
+              <Grid container alignItems="center">
+                <Grid item>
+                  <LocationOnIcon color="action" />
+                </Grid>
+                <Grid onClick={() => googleSubmit(option)} item xs>
+                  {parts.map((part, index) => (
+                    // <Grid key={index} item xs onClick={() => googleSubmit(option)} style={{ display: "flex", flexDirection: "column" }}>
 
+                    <span
+                      key={index}
+                      style={{ fontWeight: part.highlight ? 700 : 400 }}
+                    >
+                      {part.text}
+                    </span>
+                  ))}
 
-          />
-        )}
-        renderOption={(option) => {
-          // console.log("options", option)
-          // if (option.types === "postal_code") {
-          //   return null;
-          // }
-          const matches =
-            option.structured_formatting.main_text_matched_substrings;
-          const parts = parse(
-            option.structured_formatting.main_text,
-            matches.map((match) => [match.offset, match.offset + match.length])
-          );
-
-          return (
-            <Grid container alignItems="center">
-              <Grid item>
-                <LocationOnIcon color="action" />
+                  <Typography variant="body2" color="textSecondary">
+                    {option.structured_formatting.secondary_text}
+                  </Typography>
+                </Grid>
               </Grid>
-              <Grid onClick={() => googleSubmit(option)} item xs>
-                {parts.map((part, index) => (
-                  // <Grid key={index} item xs onClick={() => googleSubmit(option)} style={{ display: "flex", flexDirection: "column" }}>
-
-                  <span
-                    key={index}
-                    style={{ fontWeight: part.highlight ? 700 : 400 }}
-                  >
-                    {part.text}
-                  </span>
-                ))}
-
-                <Typography variant="body2" color="textSecondary">
-                  {option.structured_formatting.secondary_text}
-                </Typography>
-              </Grid>
-            </Grid>
-          );
-        }}
-      />
+            );
+          }}
+        />
       </form>
     </>
   );

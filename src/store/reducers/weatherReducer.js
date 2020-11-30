@@ -11,8 +11,7 @@ const TOGGLE_METRIC = " TOGGLE_METRIC";
 
 const initialState = {
   error: "",
-  isFetchingCurrent: false,
-  isFetchingForecast: false,
+  isFetching: false,
   city: "",
   zipCode: "",
   current: [],
