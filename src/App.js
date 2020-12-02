@@ -2,10 +2,10 @@ import './App.css';
 import Header from './components/Header';
 import WeatherContainer from './components/weather/WeatherContainer';
 
-function App() {
+const App = () => {
 
   return (
-    <div className="app" >
+    <div className="app" data-test="appComponent">
       <Header />
       <WeatherContainer />
     </div>

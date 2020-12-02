@@ -8,7 +8,7 @@ import Switch from "@material-ui/core/Switch";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
 import { CircularProgress } from "@material-ui/core";
-import { TOGGLE_METRIC } from "../../store/reducers/weatherReducer";
+import { types } from "../../state/actions";
 
 const AntSwitch = withStyles((theme) => ({
   root: {
@@ -56,7 +56,7 @@ const WeatherContainer = () => {
 
   const handleChange = (event) => {
     // setState({ ...state, [event.target.name]: event.target.checked });
-    dispatch({ type: TOGGLE_METRIC });
+    dispatch({ type: types.TOGGLE_METRIC });
   };
 
   return (

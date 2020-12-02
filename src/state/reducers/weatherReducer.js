@@ -1,44 +1,35 @@
-import {
-  FETCH_WEATHER_START,
-  FETCH_WEATHER_SUCCESS,
-  FETCH_WEATHER_FAILURE
-} from "../actions/weatherAction";
+import { types } from "../actions";
 
-export const TOGGLE_METRIC = " TOGGLE_METRIC";
 
-const initialState = {
+export const initialState = {
   error: "",
   isFetching: false,
-  city: "",
-  zipCode: "",
-  current: [],
-  forecast: [],
-  data: [],
+  data: {},
   toggleUS: true,
 };
 
 export const weatherReducer = (state = initialState, action) => {
   switch (action.type) {
-    case FETCH_WEATHER_START:
+    case types.FETCH_WEATHER_START:
       return {
         ...state,
         isFetching: true,
         error: "",
       };
-    case FETCH_WEATHER_SUCCESS:
+    case types.FETCH_WEATHER_SUCCESS:
       return {
         ...state,
         isFetching: false,
         data: action.payload,
         error: "",
       };
-    case FETCH_WEATHER_FAILURE:
+    case types.FETCH_WEATHER_FAILURE:
       return {
         ...state,
         isFetching: false,
         error: action.payload,
       };
-    case TOGGLE_METRIC:
+    case types.TOGGLE_METRIC:
       return {
         ...state,
         toggleUS: !state.toggleUS,

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { fetchWeather } from "../../store/actions";
+import { fetchWeather } from "../../state/actions";
 import { useSelector, useDispatch } from "react-redux";
 import throttle from "lodash/throttle";
 import parse from "autosuggest-highlight/parse";
@@ -229,7 +229,7 @@ const GoogleSearch = () => {
 
   return (
     <>
-      <form className="search" onSubmit={formSubmit}>
+      <form className="search" onSubmit={formSubmit} data-type='searchComponent'>
         <CssAutoComplete
           id="google-map"
           classes={classes}
