@@ -34,6 +34,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;
+  /* align-content: space-between; */
   width: 100%;
   min-width: 325px;
 
@@ -103,3 +104,46 @@
   align-self: flex-end;
 
 }
+
+/* BELOW IS TEST CSS FRO ALT VIEW */
+
+body {
+  line-height: 1;
+  /* background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.75)); */
+  height: 100vh;
+}
+
+.current__card {
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  /* text-shadow: 4px 3px rgba(50, 50, 70, 0.5); */
+  /* text-align: center; */
+  box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
+}
+
+.forecast__card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 30%;
+  height: 100px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  /* text-shadow: 4px 3px rgba(50, 50, 70, 0.5); */
+  text-align: center;
+  box-shadow: 3px 6px rgba(0, 0, 0, 0.2);
+}
+.weather__container__top {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+/* .toggle {
+  display: flex;
+  align-self: flex-end;
+
+} */

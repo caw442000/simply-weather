@@ -69,6 +69,8 @@ const WeatherContainer = () => {
         </>
       ) : (
         <>
+        <div className = "weather__container__top">
+       
           <Typography component="div" className="toggle">
             <Grid component="label" container alignItems="center" spacing={1}>
               <Grid item>°C</Grid>
@@ -83,8 +85,10 @@ const WeatherContainer = () => {
             </Grid>
           </Typography>
           <CurrentWeather metric={toggleMetric} />
+
+          </div>
           <ForecastWeather metric={toggleMetric} />
-        </>
+          </>
       )}
     </div>
   );
