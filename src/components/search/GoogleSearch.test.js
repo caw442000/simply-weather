@@ -141,20 +141,20 @@
 // });
 
 
-import React from 'react'
-// We're using our own custom render function and not RTL's render
-// our custom utils also re-export everything from RTL
-// so we can import fireEvent and screen here as well
-import { render, fireEvent, screen } from '../../utils/__test__/test-utils.js'
-import GoogleSearch from '../../components/search/GoogleSearch'
-import { weatherReducer as reducer, initialState } from '../../state/reducers/weatherReducer'
+// import React from 'react'
+// // We're using our own custom render function and not RTL's render
+// // our custom utils also re-export everything from RTL
+// // so we can import fireEvent and screen here as well
+// import { render, fireEvent, screen } from '../../utils/__test__/test-utils.js'
+// import GoogleSearch from '../../components/search/GoogleSearch'
+// import { weatherReducer as reducer, initialState } from '../../state/reducers/weatherReducer'
 
 
-it('Renders the connected app with initialState', () => {
-  render(<GoogleSearch />, { initialState: initialState })
+// it('Renders the connected app with initialState', () => {
+//   render(<GoogleSearch />, { initialState: initialState })
 
-  // expect(screen.getByText(/redux user/i)).toBeInTheDocument()
-})
+//   // expect(screen.getByText(/redux user/i)).toBeInTheDocument()
+// })
 
 // import React from 'react';
 // import { Provider } from 'react-redux';
@@ -183,3 +183,5 @@ it('Renders the connected app with initialState', () => {
 //   );
 //   // expect(asFragment()).toMatchSnapshot();
 // });
+
+
