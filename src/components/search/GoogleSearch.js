@@ -1,8 +1,16 @@
-import React, { useState } from "react";
-import { fetchWeather } from "../../state/actions";
+import React, { useState, useRef, useMemo, useContext } from "react";
+// import { fetchWeather } from "../../state/actions";
 import { useSelector, useDispatch } from "react-redux";
 import throttle from "lodash/throttle";
 import parse from "autosuggest-highlight/parse";
+import { WeatherContext, DispatchContext } from "../../contexts/WeatherContext";
+import { axiosWithAuth } from '../../utils/axiosWithAuth';
+import {
+  getGeocode,
+  getLatLng,
+} from "use-places-autocomplete";
+import * as api from '../../api';
+
 
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -10,11 +18,10 @@ import LocationOnIcon from "@material-ui/icons/LocationOn";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
+import { types } from '../../state/actions/types'
 
-import {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY
+
 
 const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_LOCATION_API_KEY;
 
@@ -75,8 +82,10 @@ const useStyles = makeStyles((theme) => ({
 
 
 const GoogleSearch = () => {
-  const dispatch = useDispatch();
-  const weatherData = useSelector((state) => state.weather.data);
+  // const dispatch = useDispatch();
+  // const weatherData = useSelector((state) => state.weather.data);
+  const dispatch = useContext(DispatchContext);
+  const state = useContext(WeatherContext);
 
   // const [search, setSearch] = useState({
   //   zipcode: "",
@@ -84,14 +93,14 @@ const GoogleSearch = () => {
   //   state: "",
   // });
 
-  console.log("length", weatherData?.length);
-  console.log("data", weatherData);
+  // console.log("length", weatherData?.length);
+  // console.log("data", weatherData);
 
   const classes = useStyles();
-  const [value, setValue] = React.useState(null);
-  const [inputValue, setInputValue] = React.useState("");
-  const [options, setOptions] = React.useState([]);
-  const loaded = React.useRef(false);
+  const [value, setValue] = useState(null);
+  const [inputValue, setInputValue] = useState("");
+  const [options, setOptions] = useState([]);
+  const loaded = useRef(false);
 
   if (typeof window !== "undefined" && !loaded.current) {
     if (!document.querySelector("#google-maps")) {
@@ -105,7 +114,7 @@ const GoogleSearch = () => {
     loaded.current = true;
   }
 
-  const fetch = React.useMemo(
+  const fetch = useMemo(
     () =>
       throttle((request, callback) => {
         autocompleteService.current.getPlacePredictions(request, callback);
@@ -164,7 +173,8 @@ const GoogleSearch = () => {
 
     try {
       // await dispatch(fetchWeather(option?.description || option || inputValue));
-      await dispatch(fetchWeather(inputValue));
+      console.log("before fetch weather form submit", inputValue)
+      await fetchWeather(inputValue);
       // dispatch(fetchForecast(search));
     } catch (error) {
       console.log("zipcode submit error", error);
@@ -194,7 +204,8 @@ const GoogleSearch = () => {
 
 
     try {
-      await dispatch(fetchWeather(submission || inputValue));
+      console.log("before fetch weather")
+      await fetchWeather(submission || inputValue);
     } catch (error) {
       console.log("google submit error", error);
     }
@@ -204,6 +215,20 @@ const GoogleSearch = () => {
     setValue(null);
     submission = null;
   };
+
+  async function fetchWeather(search) {
+    console.log('inside fetch weather');
+    await dispatch({ type: types.FETCH_WEATHER_START, payload: true });
+    try {
+      const { data } = await api.fetchForecastWeather(search);
+      dispatch({ type: types.FETCH_WEATHER_SUCCESS, payload: data });
+    } catch (error) {
+      console.log(error);
+      dispatch({ type: types.FETCH_WEATHER_FAILURE, payload: error });
+  
+    }
+  
+  }
 
   function containsAny(source, target) {
     let result = source?.filter(function (item) {

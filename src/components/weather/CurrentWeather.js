@@ -1,10 +1,17 @@
-import { useEffect } from "react";
+import { useEffect, useContext } from "react";
 import { useSelector } from "react-redux";
+import { WeatherContext, DispatchContext } from "../../contexts/WeatherContext";
+
 
 const CurrentWeather = () => {
-  const weatherData = useSelector((state) => state.weather.data);
-  const metric = useSelector((state) => state.weather.toggleUS);
+  const dispatch = useContext(DispatchContext);
+  const state = useContext(WeatherContext);
 
+  const weatherData = state.data
+  const metric = state.toggleUS
+  // const weatherData = useSelector((state) => state.weather.data);
+  // const metric = useSelector((state) => state.weather.toggleUS);
+  
   const dateTime = new Date(0);
 
   console.log("current weather", weatherData);

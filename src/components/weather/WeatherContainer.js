@@ -1,7 +1,9 @@
-import React from "react";
+import React, {useContext} from "react";
 import CurrentWeather from "./CurrentWeather";
 import ForecastWeather from "./Forecast/ForecastWeather";
 import { useSelector, useDispatch } from "react-redux";
+import { WeatherContext, DispatchContext } from "../../contexts/WeatherContext";
+
 
 import { withStyles } from "@material-ui/core/styles";
 import Switch from "@material-ui/core/Switch";
@@ -47,10 +49,20 @@ const WeatherContainer = () => {
   // const [state, setState] = React.useState({
   //   US: true,
   // });
-  const dispatch = useDispatch();
-  const error = useSelector((state) => state.weather.error);
-  const isFetching = useSelector((state) => state.weather.isFetching);
-  const toggleMetric = useSelector((state) => state.weather.toggleUS);
+  // const dispatch = useDispatch();
+  // const error = useSelector((state) => state.weather.error);
+  // const isFetching = useSelector((state) => state.weather.isFetching);
+  // const toggleMetric = useSelector((state) => state.weather.toggleUS);
+  
+  const dispatch = useContext(DispatchContext);
+  const state = useContext(WeatherContext);
+  
+  // const dispatch = useDispatch();
+  const error = state.error
+  const isFetching = state.isFetching
+  const toggleMetric = state.toggleUS
+
+
 
   console.log("ToggleMetric", toggleMetric);
 
