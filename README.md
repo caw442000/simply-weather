@@ -73,9 +73,9 @@
 <!-- ABOUT THE PROJECT -->
 
 ## About The Project
-
+<p align="center">
 ![Simply Weather Simple Demo](https://github.com/caw442000/weather-tracker/blob/contextapi/demo/simplyweather.gif?raw=true)
-
+</p>
 Here's why:
 
 - Your time should be focused on creating something amazing. A project that solves a problem and helps others
