@@ -74,7 +74,7 @@
 
 ## About The Project
 
-![Simply Weather Simple Demo][Simply-Weather-gif](https://github.com/caw442000/weather-tracker/blob/contextapi/demo/simplyweather.gif)
+![Simply Weather Simple Demo](https://github.com/caw442000/weather-tracker/blob/contextapi/demo/simplyweather.gif?raw=true)
 
 Here's why:
 
