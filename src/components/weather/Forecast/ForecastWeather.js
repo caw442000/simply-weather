@@ -1,13 +1,15 @@
-import React from "react";
-import { useSelector } from "react-redux";
+import React, {useContext} from "react";
 import ForecastCard from "./ForecastCard";
+import { WeatherContext, DispatchContext } from "../../../contexts/WeatherContext";
+
 
 
 
 const ForecastWeather = ({}) => {
-  const forecastData = useSelector((state) => state.weather.data.forecast);
-
-  console.log("forecast data", forecastData)
+  const dispatch = useContext(DispatchContext);
+  const state = useContext(WeatherContext);
+  const forecastData = state.data.forecast;
+  
 
   return (
     <div className="forecast__container">

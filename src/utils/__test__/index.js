@@ -1,19 +1,20 @@
 import checkPropTypes from 'check-prop-types';
-import { applyMiddleware, createStore } from 'redux';
-import rootReducer from '../../state/reducers';
-import { middlewares } from '../../createStore';
 
-export const findByTestAtrr = (component, attr) => {
-    const wrapper = component.find(`[data-test='${attr}']`);
-    return wrapper;
-};
+/**
+ * Return node(s) with the given data-test attribute.
+ * @param {ShallowWrapper} wrapper - Enzyme shallow wrapper.
+ * @param {string} val - Value of data-test attribute for search.
+ * @returns {ShallowWrapper}
+ */
+export const findByTestAttr = (wrapper, val) => {
+  return wrapper.find(`[data-test="${val}"]`);
+}
 
-export const checkProps = (component, expectedProps) => {
-    const propsErr = checkPropTypes(component.propTypes, expectedProps, 'props', component.name);
-    return propsErr;
-};
-
-export const testStore = (initialState) => {
-    const createStoreWithMiddleware = applyMiddleware(...middlewares)(createStore);
-    return createStoreWithMiddleware(rootReducer, initialState);
-};
+export const checkProps = (component, conformingProps) => {
+  const propError = checkPropTypes(
+    component.propTypes,
+    conformingProps,
+    'prop',
+    component.name);
+  expect(propError).toBeUndefined();
+}

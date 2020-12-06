@@ -1,20 +1,13 @@
-import { useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useContext } from "react";
+import { WeatherContext,  } from "../../contexts/WeatherContext";
+
 
 const CurrentWeather = () => {
-  const weatherData = useSelector((state) => state.weather.data);
-  const metric = useSelector((state) => state.weather.toggleUS);
+  const state = useContext(WeatherContext);
 
-  const dateTime = new Date(0);
+  const weatherData = state.data
+  const metric = state.toggleUS
 
-  console.log("current weather", weatherData);
-
-  useEffect(() => {
-    console.log("local code", weatherData?.location?.localtime_epoch);
-    dateTime.setUTCSeconds(weatherData?.location?.localtime_epoch);
-    console.log(dateTime);
-    return () => {};
-  }, [weatherData]);
 
   return (
     <>
@@ -28,7 +21,6 @@ const CurrentWeather = () => {
               className="current__card__icon"
               src={weatherData?.current?.condition.icon}
             />
-            {/* <p> {weatherData?.current?.condition.text} </p> */}
             {metric === true ? (
               <h1 className="current__card__temp">
                 {" "}

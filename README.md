@@ -14,33 +14,36 @@
 *** https://www.markdownguide.org/basic-syntax/#reference-style-links
 -->
 
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
+
+
+[![GitHub forks][forks-shield]][forks-url]
+[![GitHub stars][stars-shield]][stars-url]
+[![GitHub issues][issues-shield]][issues-url]
+[![GitHub license][license-shield]][license-url]
 [![LinkedIn][linkedin-shield]][linkedin-url]
+
+
 
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/caw442000/weather-tracker">
+    <img src="src/assets/images/weather.png" alt="Logo" width="80" height="80">
   </a>
 
-  <h3 align="center">Best-README-Template</h3>
+  <h3 align="center">Simply Weather</h3>
 
   <p align="center">
-    An awesome README template to jumpstart your projects!
+    A no frills current and 3 day weather forecasting app powered by GoogleAPI and weatherAPI
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/caw442000/weather-tracker"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://github.com/caw442000/weather-tracker">View Demo</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/caw442000/weather-tracker/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/caw442000/weather-tracker/issues">Request Feature</a>
   </p>
 </p>
 
@@ -74,38 +77,28 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
-
-There are many great README templates available on GitHub, however, I didn't find one that really suit my needs so I created this enhanced one. I want to create a README template so amazing that it'll be the last one you ever need -- I think this is it.
 
 Here's why:
 
-- Your time should be focused on creating something amazing. A project that solves a problem and helps others
-- You shouldn't be doing the same tasks over and over like creating a README from scratch
-- You should element DRY principles to the rest of your life :smile:
+- Sometimes you just want to get a quick glimpse of the weather
+- You don't want all the extra information getting in the way
+- You just want something global and simple
 
-Of course, no one template will serve all projects since your needs may be different. So I'll be adding more in the near future. You may also suggest changes by forking this repo and creating a pull request or opening an issue. Thanks to all the people have have contributed to expanding this template!
-
-A list of commonly used resources that I find helpful are listed in the acknowledgements.
+Simply Weather is just that.  A no frills global weather app just for you.
 
 ### Built With
 
-This section should list any major frameworks that you built your project using. Leave any add-ons/plugins for the acknowledgements section. Here are a few examples.
-
 - [Material UI](https://material-ui.com/)
 - [React](https://reactjs.org/)
-- [Redux](https://redux.js.org/)
+- [Context API](https://reactjs.org/docs/context.html)
 
 <!-- GETTING STARTED -->
 
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+To get a local copy up and running follow these steps.
 
 ### Prerequisites
-
-This is an example of how to list things you need to use the software and how to install them.
 
 - npm
   ```sh
@@ -114,9 +107,11 @@ This is an example of how to list things you need to use the software and how to
 
 ### Installation
 
-1. Get a free API Key at [https://www.weatherapi.com/](https://www.weatherapi.com/)
+1. ⚠️ Before you can start using the Google Places API and Geocoding API, you must sign up and create a billing account
 
-2. ⚠️ Before you can start using the Google Places API and Geocoding API, you must sign up and create a billing account
+- [Instructions for Google API](https://developers.google.com/places/web-service/get-api-key)
+
+2. Get a free API Key at [https://www.weatherapi.com/](https://www.weatherapi.com/)
 
 3. Clone the repo
    ```sh
@@ -128,6 +123,7 @@ This is an example of how to list things you need to use the software and how to
    ```
 5. Create a `.env` file in src folder
 
+
 6. Enter your API in `.env`
    ```JS
     REACT_APP_WEATHER_API_KEY=ENTER YOUR API;
@@ -138,15 +134,13 @@ This is an example of how to list things you need to use the software and how to
 
 ## Usage
 
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
+![Simply Weather Simple Demo](https://github.com/caw442000/weather-tracker/blob/contextapi/demo/simplyweather.gif?raw=true)
 
 <!-- ROADMAP -->
 
 ## Roadmap
 
-See the [open issues](https://github.com/othneildrew/Best-README-Template/issues) for a list of proposed features (and known issues).
+See the [open issues](https://github.com/caw442000/weather-tracker/issues) for a list of proposed features (and known issues).
 
 <!-- CONTRIBUTING -->
 
@@ -170,39 +164,37 @@ Distributed under the MIT License. See `LICENSE` for more information.
 
 ## Contact
 
-Your Name - [@your_twitter](https://twitter.com/your_username) - email@example.com
+Cedric Winbush - [@visionNfocus](https://twitter.com/visionNfocus) - cawinbushjr@gmail.com
 
-Project Link: [https://github.com/your_username/repo_name](https://github.com/your_username/repo_name)
+Project Link: [https://simply-weather.vercel.app/](https://simply-weather.vercel.app/)
 
 <!-- ACKNOWLEDGEMENTS -->
 
 ## Acknowledgements
 
-- [GitHub Emoji Cheat Sheet](https://www.webpagefx.com/tools/emoji-cheat-sheet)
-- [Img Shields](https://shields.io)
+- [Google API](https://cloud.google.com/)
+- [Weatherapi](https://www.weatherapi.com/)
+- [Vercel](https://vercel.com/)
+- [use-places-autocomplete](https://github.com/wellyshen/use-places-autocomplete)
+- [autosuggest-highlight/parse](https://github.com/moroshko/autosuggest-highlight)
 - [Choose an Open Source License](https://choosealicense.com)
-- [GitHub Pages](https://pages.github.com)
-- [Animate.css](https://daneden.github.io/animate.css)
-- [Loaders.css](https://connoratherton.com/loaders)
-- [Slick Carousel](https://kenwheeler.github.io/slick)
-- [Smooth Scroll](https://github.com/cferdinandi/smooth-scroll)
-- [Sticky Kit](http://leafo.net/sticky-kit)
-- [JVectorMap](http://jvectormap.com)
-- [Font Awesome](https://fontawesome.com)
+
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
 [contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
 [contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
-[forks-shield]: https://img.shields.io/github/forks/othneildrew/Best-README-Template.svg?style=for-the-badge
-[forks-url]: https://github.com/othneildrew/Best-README-Template/network/members
-[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
-[stars-url]: https://github.com/othneildrew/Best-README-Template/stargazers
+[forks-shield]: https://img.shields.io/github/forks/caw442000/weather-tracker?style=for-the-badge
+[forks-url]: https://github.com/caw442000/weather-tracker/network
+[stars-shield]: https://img.shields.io/github/stars/caw442000/weather-tracker?style=for-the-badge
+[stars-url]: https://github.com/caw442000/weather-tracker/stargazers
 [issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
-[issues-url]: https://github.com/othneildrew/Best-README-Template/issues
-[license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/othneildrew/Best-README-Template/blob/master/LICENSE.txt
+[issues-url]: https://github.com/caw442000/weather-tracker/issues
+[license-shield]: https://img.shields.io/github/license/caw442000/weather-tracker?style=for-the-badge
+[license-url]: https://github.com/caw442000/weather-tracker/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
-[linkedin-url]: https://linkedin.com/in/othneildrew
+[linkedin-url]: https://www.linkedin.com/in/cedricwinbush/
 [product-screenshot]: images/screenshot.png
+
+

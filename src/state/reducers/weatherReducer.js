@@ -13,7 +13,7 @@ export const weatherReducer = (state = initialState, action) => {
     case types.FETCH_WEATHER_START:
       return {
         ...state,
-        isFetching: true,
+        isFetching: action.payload,
         error: "",
       };
     case types.FETCH_WEATHER_SUCCESS:

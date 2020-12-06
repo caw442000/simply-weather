@@ -1,11 +1,13 @@
-import React from "react";
+import React, {useContext} from "react";
 import Moment from "react-moment";
-import { useSelector} from "react-redux";
+import { WeatherContext } from "../../../contexts/WeatherContext";
+
 
 
 const ForecastCard = ({ index, forecast }) => {
-  console.log("forecast", forecast);
-  const metric = useSelector((state) => state.weather.toggleUS);
+
+  const state = useContext(WeatherContext);
+  const metric = state.toggleUS;
   
 
 
