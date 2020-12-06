@@ -25,7 +25,7 @@
 <br />
 <p align="center">
   <a href="https://github.com/caw442000/weather-tracker">
-    <img src="assets/images/weather.ico" alt="Logo" width="80" height="80">
+    <img src="https://github.com/caw442000/weather-tracker/raw/contextapi/assets/images/weather.ico" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Simply Weather</h3>
@@ -74,7 +74,7 @@
 
 ## About The Project
 
-![Simply Weather Simple Demo][product-gif](demo/simplyweather.gif)
+![Simply Weather Simple Demo][Simply-Weather-gif](https://github.com/caw442000/weather-tracker/blob/contextapi/demo/simplyweather.gif)
 
 Here's why:
 
