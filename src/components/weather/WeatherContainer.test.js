@@ -25,7 +25,7 @@ describe("<GoogeleSearch />", () => {
 );
     it("toggle should render blank", () => {
       // const toggle = getByTestId('toggle');
-      // const toggleRole = getByRole('checkbox')
+      const toggleRole = getByRole('')
 
 
       // console.log(toggleRole)

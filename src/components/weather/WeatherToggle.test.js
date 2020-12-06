@@ -38,8 +38,9 @@ describe("<WeatherToggle />", () => {
       
       
       userEvent.click(toggleRole)
+      userEvent.click(toggleRole)
 
-      expect(toggleRole.checked).toEqual(true)
+      expect(toggleRole.checked).toEqual(false)
 
     });
   });

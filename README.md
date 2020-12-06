@@ -24,8 +24,8 @@
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
-  <a href="https://github.com/othneildrew/Best-README-Template">
-    <img src="images/logo.png" alt="Logo" width="80" height="80">
+  <a href="https://github.com/caw442000/weather-tracker">
+    <img src="assets/images/weather.ico" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">Simply Weather</h3>
@@ -33,14 +33,14 @@
   <p align="center">
     A no frills current and 3 day forecast weather app powered by GoogleAPI and weatherAPI
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/caw442000/weather-tracker"><strong>Explore the docs »</strong></a>
     <br />
     <br />
-    <a href="https://github.com/othneildrew/Best-README-Template">View Demo</a>
+    <a href="https://github.com/caw442000/weather-tracker">View Demo</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Report Bug</a>
+    <a href="https://github.com/caw442000/weather-tracker/issues">Report Bug</a>
     ·
-    <a href="https://github.com/othneildrew/Best-README-Template/issues">Request Feature</a>
+    <a href="https://github.com/caw442000/weather-tracker/issues">Request Feature</a>
   </p>
 </p>
 
@@ -74,7 +74,7 @@
 
 ## About The Project
 
-[![Product Name Screen Shot][product-screenshot]](https://example.com)
+[![Simply Weather Simple Demo][product-gif]](demo/simplyweather.gif)
 
 Here's why:
 
