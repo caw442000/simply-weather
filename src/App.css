@@ -5,6 +5,7 @@
   max-width: 800px;
   margin: 0 auto;
   padding: 20px;
+  height: 100vh;
   /* min-width: 325px; */
 }
 
@@ -40,7 +41,8 @@
   min-width: 325px;
 
   max-width: 100%;
-  height: 500px;
+  /* height: 500px; */
+  flex: 1;
   color: white;
 }
 
@@ -51,6 +53,8 @@
   flex-direction: column;
   width: 100%;
   min-width: 320px;
+  margin-top: 10px;
+  /* padding: px 0px 0px 15px; */
 
 }
 
@@ -61,7 +65,7 @@
   margin: 5px;
 }
 .current__card__location {
-  margin: 5px;
+  margin: 10px 10px 0px;
   font-size: 2rem;
 }
 
@@ -82,7 +86,7 @@
   display: flex;
   justify-content: space-between;
   width: 100%;
-  margin-bottom: 50px;
+  margin: 50px 0;
   font-size: 1.2rem;
   min-width: 320px;
 
@@ -148,3 +152,7 @@ body {
   align-self: flex-end;
 
 } */
+
+.MuiSvgIcon-root {
+  color: white;
+}

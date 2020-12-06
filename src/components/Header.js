@@ -3,7 +3,7 @@ import GoogleSearch from './search/GoogleSearch';
 
 const Header = () => {
   return (
-    <div className="header">
+    <div className="header" data-test="component-header">
       <h1>Simply Weather</h1>
       <GoogleSearch />
     </div>

@@ -1,16 +1,9 @@
 import React, { useState, useRef, useMemo, useContext } from "react";
-// import { fetchWeather } from "../../state/actions";
-import { useSelector, useDispatch } from "react-redux";
 import throttle from "lodash/throttle";
 import parse from "autosuggest-highlight/parse";
 import { WeatherContext, DispatchContext } from "../../contexts/WeatherContext";
-import { axiosWithAuth } from '../../utils/axiosWithAuth';
-import {
-  getGeocode,
-  getLatLng,
-} from "use-places-autocomplete";
-import * as api from '../../api';
-
+import { getGeocode, getLatLng } from "use-places-autocomplete";
+import * as api from "../../api";
 
 import TextField from "@material-ui/core/TextField";
 import Autocomplete from "@material-ui/lab/Autocomplete";
@@ -18,13 +11,13 @@ import LocationOnIcon from "@material-ui/icons/LocationOn";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { types } from '../../state/actions/types'
+import { types } from "../../state/actions/types";
 
-const API_KEY = process.env.REACT_APP_WEATHER_API_KEY
-
+const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_LOCATION_API_KEY;
 
+// updates Material UI styling
 
 const CssAutoComplete = withStyles({
   root: {
@@ -53,8 +46,19 @@ const CssAutoComplete = withStyles({
       },
     },
   },
-
+  input: {},
 })(Autocomplete);
+
+const useStyles = makeStyles((theme) => ({
+  input: {
+    color: "white",
+    "&::placeholder": {
+      color: "white",
+    },
+  },
+}));
+
+// load script to add script to index.html
 
 function loadScript(src, position, id) {
   if (!position) {
@@ -70,37 +74,18 @@ function loadScript(src, position, id) {
 
 const autocompleteService = { current: null };
 
-const useStyles = makeStyles((theme) => ({
-  input: {
-    color: "white",
-    "&::placeholder": {
-      color: "white",
-    },
-  },
-}));
-
-
-
 const GoogleSearch = () => {
-  // const dispatch = useDispatch();
-  // const weatherData = useSelector((state) => state.weather.data);
   const dispatch = useContext(DispatchContext);
   const state = useContext(WeatherContext);
-
-  // const [search, setSearch] = useState({
-  //   zipcode: "",
-  //   city: "",
-  //   state: "",
-  // });
-
-  // console.log("length", weatherData?.length);
-  // console.log("data", weatherData);
 
   const classes = useStyles();
   const [value, setValue] = useState(null);
   const [inputValue, setInputValue] = useState("");
   const [options, setOptions] = useState([]);
   const loaded = useRef(false);
+
+  // checks if window is up and it script hasn't been loaded
+  // loads the googleapi script to add autosearch with google functionality
 
   if (typeof window !== "undefined" && !loaded.current) {
     if (!document.querySelector("#google-maps")) {
@@ -113,6 +98,8 @@ const GoogleSearch = () => {
 
     loaded.current = true;
   }
+
+  // fetchs the predictions to add to autosearch dropdown
 
   const fetch = useMemo(
     () =>
@@ -158,66 +145,92 @@ const GoogleSearch = () => {
     };
   }, [value, inputValue, fetch]);
 
-  // const handleChange = (e) => {
-  //   setSearch({
-  //     ...search,
-  //     [e.target.name]: e.target.value,
-  //   });
-  //   console.log("zip", search);
-  // };
+
+
+
+
+  // submit for if user doesn't seleect from drop down box
+  // less accurate but doesn't disrupt user flow
 
   const formSubmit = async (e) => {
     e.preventDefault();
-    // console.log("value to submit", value?.description);
-    // console.log("value to option", option);
 
     try {
-      // await dispatch(fetchWeather(option?.description || option || inputValue));
-      console.log("before fetch weather form submit", inputValue)
       await fetchWeather(inputValue);
       // dispatch(fetchForecast(search));
     } catch (error) {
       console.log("zipcode submit error", error);
     }
 
-    // setSearch({
-    //   zipcode: "",
-    //   city: "",
-    //   state: "",
-    // });
-
     setInputValue("");
     setValue(null);
   };
-  const googleSubmit = async (option) => {
-    let submission; 
-    await getGeocode({ address: option.description })
-    .then((results) => getLatLng(results[0]))
-    .then(({ lat, lng }) => {
-      console.log("📍 Coordinates: ", { lat, lng });
-      submission = `${lat},${lng}`
-    })
-    .catch((error) => {
-      console.log("😱 Error: ", error);
-    });
-    
 
+  // submit for if user clicks on dropdown item
+  // uses google supplied lat lng to send to weather api
+
+
+  const googleSubmit = async (option) => {
+    let submission;
+    try {
+      await getGeocode({ address: option.description })
+        .then((results) => getLatLng(results[0]))
+        .then(({ lat, lng }) => {
+          console.log("📍 Coordinates: ", { lat, lng });
+          submission = `${lat},${lng}`;
+        })
+        .catch((error) => {
+          console.log("😱 Error: ", error);
+        });
+    } catch (error) {
+      console.log("error with geocode", error);
+    }
 
     try {
-      console.log("before fetch weather")
+      console.log("before fetch weather");
       await fetchWeather(submission || inputValue);
     } catch (error) {
       console.log("google submit error", error);
     }
-
 
     setInputValue("");
     setValue(null);
     submission = null;
   };
 
-  async function fetchWeather(search) {
-    console.log('inside fetch weather');
+  // helper function to help limit Options Filter function
+  // unable to limit google request return so wanted to limit what
+  // user sees in dropdown.  
+
+  // No Longer need as error was based on description submissions in
+  // Google submit however switched to lat lng submission to api
+
+  // function containsAny(source, target) {
+  //   let result = source?.filter(function (item) {
+  //     return target.indexOf(item) > -1;
+  //   });
+  //   return result.length > 0;
+  // }
+
+  // const OptionFilter = (options) => {
+  //   const filteredOptions = options?.filter((option) => {
+  //     let types = option.types;
+  //     return containsAny(types, [
+  //       "postal_code",
+  //       "street_address",
+  //       "locality",
+  //       "geocode",
+  //     ]);
+  //   });
+
+  //   console.log("options", filteredOptions);
+
+  //   return filteredOptions;
+  // };
+
+  // async call to dispatch to get weather
+
+  const fetchWeather = async (search) => {
     await dispatch({ type: types.FETCH_WEATHER_START, payload: true });
     try {
       const { data } = await api.fetchForecastWeather(search);
@@ -225,38 +238,22 @@ const GoogleSearch = () => {
     } catch (error) {
       console.log(error);
       dispatch({ type: types.FETCH_WEATHER_FAILURE, payload: error });
-  
     }
-  
-  }
-
-  function containsAny(source, target) {
-    let result = source?.filter(function (item) {
-      return target.indexOf(item) > -1;
-    });
-    return result.length > 0;
-  }
-  const OptionFilter = (options) => {
-    const filteredOptions = options?.filter((option) => {
-      let types = option.types;
-      return containsAny(types, [
-        "postal_code",
-        "street_address",
-        "locality",
-        "geocode",
-      ]);
-    });
-
-    console.log("options", filteredOptions);
-
-    return filteredOptions;
   };
+
+ 
+
 
   return (
     <>
-      <form className="search" onSubmit={formSubmit} data-type='searchComponent'>
+      <form
+        className="search"
+        onSubmit={formSubmit}
+        data-testid="commponent-googlesearch"
+      >
         <CssAutoComplete
           id="google-map"
+          data-testid="autocomplete"
           classes={classes}
           freeSolo
           getOptionLabel={(option) =>
@@ -269,7 +266,6 @@ const GoogleSearch = () => {
           includeInputInList
           filterSelectedOptions
           fullWidth
-        
           value={value}
           onClick={() => googleSubmit(value)}
           onChange={(event, newValue) => {
@@ -278,7 +274,6 @@ const GoogleSearch = () => {
           }}
           onInputChange={(event, newInputValue) => {
             setInputValue(newInputValue);
-            console.log("what is input change", inputValue);
           }}
           renderInput={(params) => (
             <TextField
@@ -290,6 +285,8 @@ const GoogleSearch = () => {
                 className: classes.input,
               }}
               required
+
+              // data-testid="input"
             />
           )}
           renderOption={(option) => {
