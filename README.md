@@ -88,9 +88,13 @@ Simply Weather is just that.  A no frills global weather app just for you.
 
 ### Built With
 
-- [Material UI](https://material-ui.com/)
 - [React](https://reactjs.org/)
 - [Context API](https://reactjs.org/docs/context.html)
+- [Material UI](https://material-ui.com/)
+- [Google API](https://cloud.google.com/)
+- [Weatherapi](https://www.weatherapi.com/)
+
+
 
 <!-- GETTING STARTED -->
 
@@ -172,8 +176,7 @@ Project Link: [https://simply-weather.vercel.app/](https://simply-weather.vercel
 
 ## Acknowledgements
 
-- [Google API](https://cloud.google.com/)
-- [Weatherapi](https://www.weatherapi.com/)
+
 - [Vercel](https://vercel.com/)
 - [use-places-autocomplete](https://github.com/wellyshen/use-places-autocomplete)
 - [autosuggest-highlight/parse](https://github.com/moroshko/autosuggest-highlight)
