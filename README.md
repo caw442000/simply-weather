@@ -74,7 +74,7 @@
 
 ## About The Project
 
-[![Simply Weather Simple Demo][product-gif]](demo/simplyweather.gif)
+![Simply Weather Simple Demo][product-gif](demo/simplyweather.gif)
 
 Here's why:
 
@@ -92,7 +92,7 @@ This section should list any major frameworks that you built your project using.
 
 - [Material UI](https://material-ui.com/)
 - [React](https://reactjs.org/)
-- [Redux](https://redux.js.org/)
+- [Context API](https://reactjs.org/docs/context.html)
 
 <!-- GETTING STARTED -->
 
