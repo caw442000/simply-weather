@@ -189,7 +189,7 @@ Project Link: [https://simply-weather.vercel.app/](https://simply-weather.vercel
 [forks-url]: https://github.com/caw442000/weather-tracker/network
 [stars-shield]: https://img.shields.io/github/stars/caw442000/weather-tracker?style=for-the-badge
 [stars-url]: https://github.com/caw442000/weather-tracker/stargazers
-[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-shield]: https://img.shields.io/github/issues/caw442000/weather-tracker?style=for-the-badge
 [issues-url]: https://github.com/caw442000/weather-tracker/issues
 [license-shield]: https://img.shields.io/github/license/caw442000/weather-tracker?style=for-the-badge
 [license-url]: https://github.com/caw442000/weather-tracker/blob/main/LICENSE
