@@ -19,6 +19,7 @@ const CurrentWeather = () => {
             <img
               className="current__card__icon"
               src={weatherData?.current?.condition.icon}
+              alt="current weather icon"
             />
             {metric === true ? (
               <h1 className="current__card__temp">

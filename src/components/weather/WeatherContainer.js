@@ -1,15 +1,14 @@
 import React, { useContext } from "react";
 import CurrentWeather from "./CurrentWeather";
 import ForecastWeather from "./Forecast/ForecastWeather";
-import { WeatherContext, DispatchContext } from "../../contexts/WeatherContext";
+import { WeatherContext } from "../../contexts/WeatherContext";
 
 import WeatherToggle from "./WeatherToggle";
 import { CircularProgress } from "@material-ui/core";
 
-import './WeatherContainer.css'
+import "./WeatherContainer.css";
 
 const WeatherContainer = () => {
-  const dispatch = useContext(DispatchContext);
   const state = useContext(WeatherContext);
 
   const error = state.error;
@@ -18,7 +17,10 @@ const WeatherContainer = () => {
   const currentFetched = state.data.current;
 
   return (
-    <div className="weather__container" data-testid='component-weathercontainer'>
+    <div
+      className="weather__container"
+      data-testid="component-weathercontainer"
+    >
       {isFetching ? (
         <CircularProgress size="4rem" color="inherit" thickness={4} />
       ) : error ? (

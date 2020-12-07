@@ -1,7 +1,7 @@
 import React, { useState, useRef, useMemo, useContext } from "react";
 import throttle from "lodash/throttle";
 import parse from "autosuggest-highlight/parse";
-import { WeatherContext, DispatchContext } from "../../../contexts/WeatherContext";
+import { DispatchContext } from "../../../contexts/WeatherContext";
 import { getGeocode, getLatLng } from "use-places-autocomplete";
 import * as api from "../../../api";
 
@@ -14,7 +14,6 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 import { types } from "../../../store/reducers/types";
 import './GoogleSearch.css'
 
-const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
 
 const GOOGLE_API_KEY = process.env.REACT_APP_GOOGLE_LOCATION_API_KEY;
 
@@ -77,7 +76,6 @@ const autocompleteService = { current: null };
 
 const GoogleSearch = () => {
   const dispatch = useContext(DispatchContext);
-  const state = useContext(WeatherContext);
 
   const classes = useStyles();
   const [value, setValue] = useState(null);

@@ -47,8 +47,7 @@ const WeatherToggle = () => {
   const state = useContext(WeatherContext);
   
 
-  const error = state.error
-  const isFetching = state.isFetching
+
   const toggleMetric = state.toggleUS 
 
 

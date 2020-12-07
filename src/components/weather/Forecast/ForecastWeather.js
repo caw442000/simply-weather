@@ -1,13 +1,12 @@
 import React, {useContext} from "react";
 import ForecastCard from "./ForecastCard";
-import { WeatherContext, DispatchContext } from "../../../contexts/WeatherContext";
+import { WeatherContext } from "../../../contexts/WeatherContext";
 import './ForecastWeather.css'
 
 
 
 
-const ForecastWeather = ({}) => {
-  const dispatch = useContext(DispatchContext);
+const ForecastWeather = () => {
   const state = useContext(WeatherContext);
   const forecastData = state.data.forecast;
   
