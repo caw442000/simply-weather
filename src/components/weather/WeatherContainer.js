@@ -18,7 +18,7 @@ const WeatherContainer = () => {
   const currentFetched = state.data.current;
 
   return (
-    <div className="weather__container">
+    <div className="weather__container" data-testid='component-weathercontainer'>
       {isFetching ? (
         <CircularProgress size="4rem" color="inherit" thickness={4} />
       ) : error ? (

@@ -4,7 +4,7 @@ import { withStyles } from "@material-ui/core/styles";
 import Switch from "@material-ui/core/Switch";
 import Typography from "@material-ui/core/Typography";
 import Grid from "@material-ui/core/Grid";
-import { types } from "../../state/actions";
+import { types } from "../../store/reducers/types";
 
 
 

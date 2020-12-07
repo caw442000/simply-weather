@@ -77,6 +77,10 @@
 
 ## About The Project
 
+[![Product Name Screen Shot][product-screenshot]](https://simply-weather.vercel.app/)
+
+
+There are so many great weather apps available.  I just wanted to create one that was simple and elegant.
 
 Here's why:
 
@@ -197,6 +201,6 @@ Project Link: [https://simply-weather.vercel.app/](https://simply-weather.vercel
 [license-url]: https://github.com/caw442000/weather-tracker/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/cedricwinbush/
-[product-screenshot]: demo\simply_weather_screenshot.png
+[product-screenshot]: https://github.com/caw442000/weather-tracker/blob/main/demo/simply_weather_screenshot.png?raw=true
 
 

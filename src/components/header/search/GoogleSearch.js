@@ -11,7 +11,7 @@ import LocationOnIcon from "@material-ui/icons/LocationOn";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { types } from "../../../state/actions/types";
+import { types } from "../../../store/reducers/types";
 import './GoogleSearch.css'
 
 const API_KEY = process.env.REACT_APP_WEATHER_API_KEY;
