@@ -115,11 +115,11 @@ To get a local copy up and running follow these steps.
 
 ### Installation
 
-1. ⚠️ Before you can start using the Google Places API and Geocoding API, you must sign up and create a billing account
+1. ⚠️ Get a Google API Key.  Before you can start using the Google Places API and Google Geocoding API, you must sign up and create a billing account
 
 - [Instructions for Google API](https://developers.google.com/places/web-service/get-api-key)
 
-2. Get a free API Key at [https://www.weatherapi.com/](https://www.weatherapi.com/)
+2. Get a free Weatherapi API Key at [https://www.weatherapi.com/](https://www.weatherapi.com/)
 
 3. Clone the repo
    ```sh
