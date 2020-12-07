@@ -186,8 +186,7 @@ Project Link: [https://simply-weather.vercel.app/](https://simply-weather.vercel
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
 
-[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
-[contributors-url]: https://github.com/othneildrew/Best-README-Template/graphs/contributors
+
 [forks-shield]: https://img.shields.io/github/forks/caw442000/weather-tracker?style=for-the-badge
 [forks-url]: https://github.com/caw442000/weather-tracker/network
 [stars-shield]: https://img.shields.io/github/stars/caw442000/weather-tracker?style=for-the-badge
@@ -198,6 +197,6 @@ Project Link: [https://simply-weather.vercel.app/](https://simply-weather.vercel
 [license-url]: https://github.com/caw442000/weather-tracker/blob/main/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/cedricwinbush/
-[product-screenshot]: images/screenshot.png
+[product-screenshot]: demo\simply_weather_screenshot.png
 
 

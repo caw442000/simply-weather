@@ -1,13 +1,12 @@
 import { useContext } from "react";
-import { WeatherContext,  } from "../../contexts/WeatherContext";
-
+import { WeatherContext } from "../../contexts/WeatherContext";
+import './CurrentWeather.css'
 
 const CurrentWeather = () => {
   const state = useContext(WeatherContext);
 
-  const weatherData = state.data
-  const metric = state.toggleUS
-
+  const weatherData = state.data;
+  const metric = state.toggleUS;
 
   return (
     <>

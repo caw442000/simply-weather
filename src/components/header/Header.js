@@ -1,5 +1,6 @@
 import React from 'react'
 import GoogleSearch from './search/GoogleSearch';
+import './Header.css'
 
 const Header = () => {
   return (

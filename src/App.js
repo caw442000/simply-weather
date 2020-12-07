@@ -1,6 +1,6 @@
 import React, { useReducer } from "react";
 
-import Header from "./components/Header";
+import Header from "./components/header/Header";
 import WeatherContainer from "./components/weather/WeatherContainer";
 import { weatherReducer, initialState } from "./state/reducers/weatherReducer";
 import { WeatherContext, DispatchContext } from "./contexts/WeatherContext";

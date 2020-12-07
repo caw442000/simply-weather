@@ -1,0 +1,25 @@
+.weather__container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  min-width: 325px;
+  max-width: 100%;
+  flex: 1;
+  color: white;
+}
+
+.weather__container__top {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+
+}
+
+.toggle {
+  display: flex;
+  align-self: flex-end;
+
+}

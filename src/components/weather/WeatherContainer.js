@@ -6,6 +6,8 @@ import { WeatherContext, DispatchContext } from "../../contexts/WeatherContext";
 import WeatherToggle from "./WeatherToggle";
 import { CircularProgress } from "@material-ui/core";
 
+import './WeatherContainer.css'
+
 const WeatherContainer = () => {
   const dispatch = useContext(DispatchContext);
   const state = useContext(WeatherContext);

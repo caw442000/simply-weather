@@ -1,6 +1,7 @@
 import React, {useContext} from "react";
 import ForecastCard from "./ForecastCard";
 import { WeatherContext, DispatchContext } from "../../../contexts/WeatherContext";
+import './ForecastWeather.css'
 
 
 

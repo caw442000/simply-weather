@@ -1,7 +1,7 @@
 import React from "react";
 import Header from "./Header";
 import { render, screen, cleanup } from "@testing-library/react";
-import { WeatherContext, DispatchContext } from "../contexts/WeatherContext";
+import { WeatherContext, DispatchContext } from "../../contexts/WeatherContext";
 import userEvent from "@testing-library/user-event";
 
 afterEach(cleanup)
