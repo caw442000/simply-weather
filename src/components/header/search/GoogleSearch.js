@@ -175,7 +175,8 @@ const GoogleSearch = () => {
       await getGeocode({ address: option.description })
         .then((results) => getLatLng(results[0]))
         .then(({ lat, lng }) => {
-          console.log("📍 Coordinates: ", { lat, lng });
+          // console log to show coordinates
+          // console.log("📍 Coordinates: ", { lat, lng });
           submission = `${lat},${lng}`;
         })
         .catch((error) => {
